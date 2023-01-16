@@ -22,10 +22,14 @@ nvm use v17.6.0
 * Install `go`
 
 ```bash
+rm -rf /usr/local/go
 curl -L https://dl.google.com/go/go1.18.9.linux-amd64.tar.gz >/tmp/go1.18.9.linux-amd64.tar.gz
-tar -xf /tmp/go1.18.9.linux-amd64.tar.gz -C $HOME
-echo -e "export GOROOT=\"\$HOME/go\"" | tee -a ~/.bashrc
-source ~/.profile
+tar -xf /tmp/go1.18.9.linux-amd64.tar.gz -C /usr/local
+echo -e "export GOROOT=/usr/local/go" | tee -a ~/.bashrc
+echo -e "export PATH=\$PATH:\$GOROOT/bin" | tee -a ~/.bashrc
+mkdir -p $HOME/golib && echo -e "export GOPATH=\$HOME/golib" | tee -a ~/.bashrc
+echo -e "export PATH=\$PATH:\$GOPATH/bin" | tee -a ~/.bashrc
+source  ~/.bashrc
 go version
 ```
 
